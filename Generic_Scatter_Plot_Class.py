@@ -58,6 +58,10 @@ class Generic_Scatter_Plot:
           
         # End For
         
+        plt.grid(b=True, which='major', color='#444444', linestyle='-', alpha=0.2)
+        plt.minorticks_on()
+        plt.grid(b=True, which='minor', color='#AAAAAA', linestyle='-', alpha=0.2)
+
         plt.legend(loc=self.legend_position, bbox_to_anchor=self.legend_margin, fontsize='small', ncol=self.num_legend_columns)
         plt.tight_layout()
         plt.show()
