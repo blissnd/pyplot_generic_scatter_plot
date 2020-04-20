@@ -3,10 +3,11 @@ import matplotlib.pyplot as plt
 
 class Graph:
 
-    def __init__(self, colour='black', marker_radius=1, plot_label=None):
+    def __init__(self, colour='black', marker_radius=1, marker_shape='.', plot_label=None):
         self.y_value_array = []
         self.colour = []
         self.marker_size = np.pi * marker_radius ** 2
+        self.marker_shape = marker_shape
         
         self.colour.append(colour)
         self.plot_label = plot_label
@@ -34,8 +35,8 @@ class Generic_Scatter_Plot:
         self.ax = self.fig.add_subplot(1, 1, 1)
     # End Function
     
-    def add_graph(self, graph_name, colour='black', marker_radius=1, plot_label=None):
-        self.graph_dict[graph_name] = Graph(colour, marker_radius, plot_label)
+    def add_graph(self, graph_name, colour='black', marker_radius=1, marker_shape='.', plot_label=None):
+        self.graph_dict[graph_name] = Graph(colour, marker_radius, marker_shape, plot_label)
     # End Function
     
     def append_x_axis_val(self, value):
@@ -54,7 +55,7 @@ class Generic_Scatter_Plot:
 
         for current_graph in self.graph_dict:
         
-            plt.scatter(self.x_axis_array, self.graph_dict[current_graph].y_value_array, s=self.graph_dict[current_graph].marker_size, c= self.graph_dict[current_graph].colour, label= self.graph_dict[current_graph].plot_label)
+            plt.scatter(self.x_axis_array, self.graph_dict[current_graph].y_value_array, s=self.graph_dict[current_graph].marker_size, c=self.graph_dict[current_graph].colour, marker=self.graph_dict[current_graph].marker_shape, label= self.graph_dict[current_graph].plot_label)
           
         # End For
         
