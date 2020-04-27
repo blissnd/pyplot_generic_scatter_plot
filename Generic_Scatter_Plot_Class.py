@@ -20,11 +20,12 @@ class Graph:
     
 # End Class
 
-class Generic_Scatter_Plot:
-    graph_index = 0
+class Generic_Scatter_Plot:    
     
     def __init__(self, graph_name, plot_title="Scatter Plot"):
-        self.graph_index = Generic_Scatter_Plot.graph_index
+        
+        self.plt = None
+        
         self.graph_name = graph_name
         
         self.plot_title = plot_title
@@ -35,15 +36,7 @@ class Generic_Scatter_Plot:
         self.x_axis_label = 'Value'
         self.y_axis_label = 'Result'
         self.num_legend_columns = 1
-        
-        self.fig = parent_plot.figure(self.graph_index)
-        
-        self.subplot_index = 0
-        
-        self.gs = None
-        self.plt = None
-        
-        Generic_Scatter_Plot.graph_index = Generic_Scatter_Plot.graph_index + 1
+    
     # End Function
     
     def add_graph(self, graph_name, colour='black', marker_radius=1, marker_shape='.', plot_label=None):
@@ -83,35 +76,61 @@ class Generic_Scatter_Plot:
 
 class Graph_Window_Class():
     
-    graphs = {}
+    window_index = 0
+
+    def __init__(self):
+        
+        Graph_Window_Class.window_index = Graph_Window_Class.window_index + 1
+        
+        self.sub_windows = {}
+        
+        self.fig = parent_plot.figure(Graph_Window_Class.window_index)
+        
+        self.gs = None        
     
-    def add_subplot(graph_name, subplot_name):
+    # End Function
     
-        if graph_name not in Graph_Window_Class.graphs:
-             Graph_Window_Class.graphs[graph_name] = {}
+    def add_subplot_to_window(self, graph_name, subplot_name):
+    
+        if graph_name not in self.sub_windows:
+            self.sub_windows[graph_name] = {}
+            self.sub_windows[graph_name]['subplots'] = {}
         # End If
         
-        Graph_Window_Class.graphs[graph_name][subplot_name] = Generic_Scatter_Plot(graph_name, plot_title="Scatter Plot")
-        
-        Graph_Window_Class.graphs[graph_name][subplot_name].gs = Graph_Window_Class.graphs[graph_name][subplot_name].fig.add_gridspec(1, 1)
-        Graph_Window_Class.graphs[graph_name][subplot_name].plt = Graph_Window_Class.graphs[graph_name][subplot_name].fig.add_subplot(Graph_Window_Class.graphs[graph_name][subplot_name].gs[0, 0])
-        
-        #gs = self.fig.add_gridspec(2, 2)        
-        #self.plt2 = self.fig.add_subplot(gs[1, 0])
-        #self.plt3 = self.fig.add_subplot(gs[0, 1])
-        #self.plt4 = self.fig.add_subplot(gs[1, 1])
+        self.sub_windows[graph_name]['subplots'][subplot_name] = Generic_Scatter_Plot(graph_name, plot_title="Scatter Plot")
         
     # End Static Function
     
-    def render_subplots():
+    def render_subplots(self):
     
-        for graph_name, graph_object in Graph_Window_Class.graphs.items():
-            print(len(graph_object))
+        for graph_name, graph_object in self.sub_windows.items():
+        
+            num_subplots = len(graph_object['subplots'])
+            num_rows_columns = math.ceil(math.sqrt(num_subplots))
+            
+            self.gs = self.fig.add_gridspec(num_rows_columns, num_rows_columns)
+            
+            row_index = 0
+            col_index = 0
+            
+            for subplot_name, subplot_object in graph_object['subplots'].items():
+            
+                subplot_object.plt = self.fig.add_subplot(self.gs[row_index, col_index])
+                
+                col_index = col_index + 1
+                
+                if col_index == num_rows_columns:
+                    col_index = 0
+                    row_index = row_index + 1
+                # End If
+                
+            # End For
+            
         # End For
         
     # End Static Function
     
-    def show_plots():
+    def show_plots(self):
         parent_plot.show()
     # End Static Function
     
