@@ -13,7 +13,7 @@ def create_single_graph_window(graph_window_obj, window_name, subplot_name, rend
     
     graph_window_obj.add_subplot_to_window(window_name, subplot_name + '_1', 'Title_1', 'x_label_1', 'y_label_1', (1.2, 1))
     graph_window_obj.sub_windows[window_name]['subplots'][subplot_name + '_1'].add_graph('One', colour='red', marker_radius=2, plot_label='Graph One')
-    graph_window_obj.sub_windows[window_name]['subplots'][subplot_name + '_1'].add_graph('One.1', colour='black', marker_radius=2, plot_label='Graph Two')
+    graph_window_obj.sub_windows[window_name]['subplots'][subplot_name + '_1'].add_graph('One.1', colour='black', marker_radius=2, marker_shape="o", plot_label='Graph Two')
     graph_window_obj.sub_windows[window_name]['subplots'][subplot_name + '_1'].add_graph('One.2', colour='green', marker_radius=2, marker_shape="x", plot_label='Graph Three')
     
     counter = 0
