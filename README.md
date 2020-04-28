@@ -4,4 +4,4 @@ Flexible and efficient plotting of multiple scatterplot correlation graphs. See 
 
 ![Screenshot](https://github.com/blissnd/pyplot_generic_scatter_plot/blob/master/screenshot1.PNG)
 
-![](https://github.com/blissnd/pyplot_generic_scatter_plot/blob/master/screenshot2.PNG)
+![Screenshot](https://github.com/blissnd/pyplot_generic_scatter_plot/blob/master/screenshot2.PNG)
