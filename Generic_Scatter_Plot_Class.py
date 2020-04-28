@@ -21,7 +21,7 @@ class Graph:
 
 class Generic_Scatter_Plot:    
     
-    def __init__(self, graph_name, plot_title="Scatter Plot", x_axis_label='Value', y_axis_label='Result'):
+    def __init__(self, graph_name, plot_title="Scatter Plot", x_axis_label='Value', y_axis_label='Result', legend_margin = (1.2, 1)):
         
         self.plt = None        
         self.graph_name = graph_name        
@@ -29,7 +29,7 @@ class Generic_Scatter_Plot:
         self.x_axis_array = []
         self.graph_dict = {}
         self.legend_position = 'upper right'
-        self.legend_margin = (1.2, 1)
+        self.legend_margin = legend_margin
         self.x_axis_label = x_axis_label
         self.y_axis_label = y_axis_label
         self.num_legend_columns = 1    
@@ -83,14 +83,14 @@ class Graph_Window_Class():
         self.fig.suptitle(self.title, size=11)        
     # End Function
     
-    def add_subplot_to_window(self, graph_name, subplot_name, plot_title="Scatter Plot", x_axis_label='Value', y_axis_label='Result'):
+    def add_subplot_to_window(self, graph_name, subplot_name, plot_title="Scatter Plot", x_axis_label='Value', y_axis_label='Result', legend_margin=(1.2, 1)):
     
         if graph_name not in self.sub_windows:
             self.sub_windows[graph_name] = {}
             self.sub_windows[graph_name]['subplots'] = {}
         # End If
         
-        self.sub_windows[graph_name]['subplots'][subplot_name] = Generic_Scatter_Plot(graph_name,  plot_title, x_axis_label, y_axis_label)
+        self.sub_windows[graph_name]['subplots'][subplot_name] = Generic_Scatter_Plot(graph_name,  plot_title, x_axis_label, y_axis_label, legend_margin)
         
     # End Static Function
     
