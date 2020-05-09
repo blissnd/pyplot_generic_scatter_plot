@@ -3,10 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from Generic_Scatter_Plot_Class import *
 
-x_column = [10,20,30,40,50]
-a_column = [60,70,80,90,100]
-b_column = [110,120,130,140,150]
-c_column = [210,220,230,240,250]
+x_column = [0.98,1.34,-0.34,-1.45,0.0456]
+a_column = [0.14,1.55,-1.05,1.01,-0.4754]
+b_column = [1.43,1.11,2.4,-0.432,-1.22]
+c_column = [-2.31,1.44,2.1076,-0.0012,-1.972]
 
 ###############################################################################################################################
 def create_single_graph_window(graph_window_obj, window_name, subplot_name, render_subplots=False):
