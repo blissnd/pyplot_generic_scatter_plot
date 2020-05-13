@@ -96,17 +96,34 @@ def create_multi_graph_window(graph_window_obj, window_name, subplot_name, rende
 ###############################################################################################################################
 graph_window_obj = Graph_Window_Class((11.5, 6))
 create_single_graph_window(graph_window_obj, "One", "1", True)
+
+graph_window_obj.print_to_pdf("./fig.pdf")
+graph_window_obj.close_window()
+
 ###############################################################################################################################
 graph_window_1_obj = Graph_Window_Class((11.5, 6))
 create_multi_graph_window(graph_window_1_obj, "One", "1", True)
 
+graph_window_1_obj.print_to_pdf("./fig1.pdf")
+graph_window_1_obj.close_window()
+
 graph_window_2_obj = Graph_Window_Class((11.5, 6))
 create_multi_graph_window(graph_window_2_obj, "Two", "2")
+
+graph_window_2_obj.print_to_pdf("./fig2.pdf")
+graph_window_2_obj.close_window()
 
 graph_window_3_obj = Graph_Window_Class((11.5, 6))
 create_multi_graph_window(graph_window_3_obj, "Three", "3", True)
 
+graph_window_3_obj.print_to_pdf("./fig3.pdf")
+graph_window_3_obj.close_window()
+
 graph_window_4_obj = Graph_Window_Class((11.5, 6))
 create_multi_graph_window(graph_window_4_obj, "Four", "4")
+
+graph_window_4_obj.print_to_pdf("./fig4.pdf")
+graph_window_4_obj.close_window()
+
 ###############################################################################################################################
 Graph_Window_Class.show_plots()

@@ -74,7 +74,8 @@ class Graph_Window_Class():
 
     def __init__(self, window_size, title=''):
         
-        Graph_Window_Class.window_index = Graph_Window_Class.window_index + 1        
+        Graph_Window_Class.window_index = Graph_Window_Class.window_index + 1
+        self.unique_id = Graph_Window_Class.window_index
         self.sub_windows = {}        
         self.fig = parent_plot.figure(Graph_Window_Class.window_index,  figsize=window_size)        
         self.gs = None
@@ -124,6 +125,14 @@ class Graph_Window_Class():
             
         # End For
         
+    # End Function
+    
+    def print_to_pdf(self, path):
+        self.fig.savefig(path)
+    # End Function
+    
+    def close_window(self):
+        parent_plot.close(self.unique_id)
     # End Function
     
     def show_plots():        
