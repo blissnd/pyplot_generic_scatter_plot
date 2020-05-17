@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as parent_plot
 import math
+from scipy.stats import pearsonr
+from scipy.stats import spearmanr
 
 class Graph:
 
@@ -19,20 +21,20 @@ class Graph:
     # End Function    
 # End Class
 
-class Generic_Scatter_Plot:    
+class Generic_Scatter_Plot:
     
     def __init__(self, graph_name, plot_title="Scatter Plot", x_axis_label='Value', y_axis_label='Result', legend_margin = (1.2, 1)):
         
-        self.plt = None        
-        self.graph_name = graph_name        
+        self.plt = None
+        self.graph_name = graph_name
         self.plot_title = plot_title
         self.x_axis_array = []
         self.graph_dict = {}
-        self.legend_position = 'upper right'
+        self.legend_position = 'lower left'
         self.legend_margin = legend_margin
         self.x_axis_label = x_axis_label
         self.y_axis_label = y_axis_label
-        self.num_legend_columns = 1    
+        self.num_legend_columns = 1
     # End Function
     
     def add_graph(self, graph_name, colour='black', marker_radius=1, marker_shape='.', plot_label=None):
@@ -47,13 +49,25 @@ class Generic_Scatter_Plot:
         self.graph_dict[graph_name].append_y_axis_val(value)
     # End Function
     
-    def plot_graphs(self):
+    def plot_graphs(self, add_pearson_correlation=False, add_spearman_correlation=False):
         
         self.plt.set(xlabel=self.x_axis_label, ylabel=self.y_axis_label)
         
         for current_graph in self.graph_dict:
-        
-            self.plt.scatter(self.x_axis_array, self.graph_dict[current_graph].y_value_array, s=self.graph_dict[current_graph].marker_size, c=self.graph_dict[current_graph].colour, marker=self.graph_dict[current_graph].marker_shape, label= self.graph_dict[current_graph].plot_label)
+            
+            if add_pearson_correlation == True:
+                pearson_correlation, _ = pearsonr(self.x_axis_array, self.graph_dict[current_graph].y_value_array)
+                
+                self.graph_dict[current_graph].plot_label = self.graph_dict[current_graph].plot_label + ', Pearson Correlation: %.3f' % pearson_correlation                
+            # End If
+            
+            if add_spearman_correlation == True:
+                spearman_correlation, _ = spearmanr(self.x_axis_array, self.graph_dict[current_graph].y_value_array)
+                
+                self.graph_dict[current_graph].plot_label = self.graph_dict[current_graph].plot_label + ', Spearman Correlation: %.3f' % spearman_correlation                
+            # End If
+            
+            self.plt.scatter(self.x_axis_array, self.graph_dict[current_graph].y_value_array, s=self.graph_dict[current_graph].marker_size, c=self.graph_dict[current_graph].colour, marker=self.graph_dict[current_graph].marker_shape, label=self.graph_dict[current_graph].plot_label)
           
         # End For
         
@@ -80,11 +94,12 @@ class Graph_Window_Class():
         self.fig = parent_plot.figure(Graph_Window_Class.window_index,  figsize=window_size)        
         self.gs = None
         self.title = title
-        
+        #self.fig.set_figheight(15)
+        #self.fig.set_figwidth(15)
         self.fig.suptitle(self.title, size=11)        
     # End Function
     
-    def add_subplot_to_window(self, graph_name, subplot_name, plot_title="Scatter Plot", x_axis_label='Value', y_axis_label='Result', legend_margin=(1.2, 1)):                
+    def add_subplot_to_window(self, graph_name, subplot_name, plot_title="Scatter Plot", x_axis_label='Value', y_axis_label='Result', legend_margin=(1, -1.2)):                
         
         if graph_name not in self.sub_windows:
             self.sub_windows[graph_name] = {}
