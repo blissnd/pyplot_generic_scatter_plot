@@ -84,8 +84,8 @@ class Graph_Window_Class():
         self.fig.suptitle(self.title, size=11)        
     # End Function
     
-    def add_subplot_to_window(self, graph_name, subplot_name, plot_title="Scatter Plot", x_axis_label='Value', y_axis_label='Result', legend_margin=(1.2, 1)):
-    
+    def add_subplot_to_window(self, graph_name, subplot_name, plot_title="Scatter Plot", x_axis_label='Value', y_axis_label='Result', legend_margin=(1.2, 1)):                
+        
         if graph_name not in self.sub_windows:
             self.sub_windows[graph_name] = {}
             self.sub_windows[graph_name]['subplots'] = {}
@@ -112,7 +112,7 @@ class Graph_Window_Class():
                 subplot_object.plt = self.fig.add_subplot(self.gs[row_index, col_index])
                 
                 if print_titles == True:
-                    subplot_object.plt.title.set_text(subplot_name)
+                    subplot_object.plt.title.set_text(subplot_object.plot_title)
                 # End If
                 
                 col_index = col_index + 1                
